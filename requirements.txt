@@ -8,3 +8,4 @@ requests
 goose3[all]
 beautifulsoup4
 lxml
+markdownify
