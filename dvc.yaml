@@ -76,3 +76,14 @@ stages:
     - data/faq--openai-file-ids.jsonl
     outs:
     - data/openai-file-ids.jsonl
+  update_assistant_files:
+    cmd: python scripts/update_assistant_files.py --file_name_assistants data/assistants.csv
+      --file_name_file_ids data/openai-file-ids.jsonl
+      --file_name_openai_api_key data/openaiapikey.txt
+      --file_name_mapping data/assistants-files-mapping.jsonl
+    deps:
+    - scripts/update_assistant_files.py
+    - data/assistants.csv
+    - data/openai-file-ids.jsonl
+    outs:
+    - data/assistants-files-mapping.jsonl

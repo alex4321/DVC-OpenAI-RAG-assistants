@@ -172,3 +172,25 @@ stages:
       hash: md5
       md5: 901591f8c1a183f83be93cb53b0e74b1
       size: 88
+  update_assistant_files:
+    cmd: python scripts/update_assistant_files.py --file_name_assistants data/assistants.csv
+      --file_name_file_ids data/openai-file-ids.jsonl --file_name_openai_api_key data/openaiapikey.txt
+      --file_name_mapping data/assistants-files-mapping.jsonl
+    deps:
+    - path: data/assistants.csv
+      hash: md5
+      md5: 09b220eb867e86e95ef4dc1e584bfbde
+      size: 58
+    - path: data/openai-file-ids.jsonl
+      hash: md5
+      md5: 901591f8c1a183f83be93cb53b0e74b1
+      size: 88
+    - path: scripts/update_assistant_files.py
+      hash: md5
+      md5: 4e7b92d116f620557cba897a1558a0e6
+      size: 2833
+    outs:
+    - path: data/assistants-files-mapping.jsonl
+      hash: md5
+      md5: e94ac2aede678fbf55ec53142299c342
+      size: 122

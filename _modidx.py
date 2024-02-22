@@ -43,4 +43,8 @@ d = { 'settings': {'branch': '', 'doc_baseurl': '/', 'doc_host': 'https://.githu
                                                                                                           'robot/scripts/downloader_openai_files.py')},
             'robot.scripts.faq_prepare_markdown': { 'robot.scripts.faq_prepare_markdown.process': ( 'faq_prepare_markdown.html#process',
                                                                                                     'robot/scripts/faq_prepare_markdown.py')},
+            'robot.scripts.update_assistant_files': { 'robot.scripts.update_assistant_files._set_assistant_files': ( 'update_assistant_files.html#_set_assistant_files',
+                                                                                                                     'robot/scripts/update_assistant_files.py'),
+                                                      'robot.scripts.update_assistant_files.process': ( 'update_assistant_files.html#process',
+                                                                                                        'robot/scripts/update_assistant_files.py')},
             'robot.setup': {}}}
