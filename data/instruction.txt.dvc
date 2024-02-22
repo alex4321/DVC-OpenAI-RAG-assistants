@@ -1,0 +1,5 @@
+outs:
+- md5: 0da57b9cead28c9ecb31a77d6eca4251
+  size: 1376
+  hash: md5
+  path: instruction.txt

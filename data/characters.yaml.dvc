@@ -1,0 +1,5 @@
+outs:
+- md5: d9ef45837a424bba7e1f9ef60f5f767c
+  size: 4636
+  hash: md5
+  path: characters.yaml

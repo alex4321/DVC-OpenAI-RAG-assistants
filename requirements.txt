@@ -1,0 +1,6 @@
+dvc
+openai
+pandas
+pydantic
+nbdev
+pyyaml
