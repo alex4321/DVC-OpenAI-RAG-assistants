@@ -4,3 +4,7 @@ pandas
 pydantic
 nbdev
 pyyaml
+requests
+goose3[all]
+beautifulsoup4
+lxml
