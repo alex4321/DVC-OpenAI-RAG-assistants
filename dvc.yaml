@@ -1,0 +1,9 @@
+stages:
+  update_assistants:
+    cmd: pyhon scripts/assistants.py --file_name_characters=data/characters.yaml --file_name_instruction=data/instruction.txt
+      --file_name_assistants=data/assistants.csv --file_name_openai_api_key=data/openaiapikey.txt
+    deps:
+    - data/characters.yaml
+    - data/instruction.txt
+    outs:
+    - data/assistants.csv
