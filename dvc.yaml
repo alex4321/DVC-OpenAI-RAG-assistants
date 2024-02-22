@@ -1,30 +1,78 @@
 stages:
   update_assistants:
-    cmd: pyhon scripts/assistants.py --file_name_characters=data/characters.yaml --file_name_instruction=data/instruction.txt
+    cmd: python scripts/assistants.py --file_name_characters=data/characters.yaml --file_name_instruction=data/instruction.txt
       --file_name_assistants=data/assistants.csv --file_name_openai_api_key=data/openaiapikey.txt
     deps:
+    - scripts/assistants.py
     - data/characters.yaml
     - data/instruction.txt
     outs:
     - data/assistants.csv
   download_news:
-    cmd: pyhon scripts/downloader.py --file_name_urls data/urls.txt --file_name_content
+    cmd: python scripts/downloader.py --file_name_urls data/urls.txt --file_name_content
       data/urls--downloaded.jsonl --thread_pool_size 8
     deps:
+    - scripts/downloader.py
     - data/urls.txt
     outs:
     - data/urls--downloaded.jsonl
   download_markdownify:
-    cmd: pyhon scripts/markdownify.py --file_name_html data/urls--downloaded.jsonl
+    cmd: python scripts/downloader_markdownify.py --file_name_html data/urls--downloaded.jsonl
       --file_name_markdown data/urls--downloaded-markdown.jsonl
     deps:
+    - scripts/downloader_markdownify.py
     - data/urls--downloaded.jsonl
     outs:
     - data/urls--downloaded-markdown.jsonl
   download_calculate_split:
-    cmd: python --file_name_content data/urls--downloaded-markdown.jsonl --file_name_splits
+    cmd: python scripts/downloader_files_split_calculate.py --file_name_content data/urls--downloaded-markdown.jsonl --file_name_splits
       data/urls--downloaded-markdown--splits.jsonl
     deps:
+    - scripts/downloader_files_split_calculate.py
     - data/urls--downloaded-markdown.jsonl
     outs:
     - data/urls--downloaded-markdown--splits.jsonl
+  download_create_openai_files:
+    cmd: python scripts/downloader_openai_files.py --file_name_content data/urls--downloaded-markdown.jsonl --file_name_splits
+      data/urls--downloaded-markdown--splits.jsonl --file_name_openai_api_key data/openaiapikey.txt --file_name_file_ids
+      data/urls--downloaded--openai-file-ids.jsonl
+    deps:
+    - scripts/downloader_openai_files.py
+    - data/urls--downloaded-markdown.jsonl
+    - data/urls--downloaded-markdown--splits.jsonl
+    outs:
+    - data/urls--downloaded--openai-file-ids.jsonl
+  faq_markdown_prepare:
+    cmd: python scripts/faq_prepare_markdown.py --file_name_faq data/faq.csv --file_name_faq_markdown data/faq--markdown.jsonl
+    deps:
+    - scripts/faq_prepare_markdown.py
+    - data/faq.csv
+    outs:
+    - data/faq--markdown.jsonl
+  faq_calculate_split:
+    cmd: python scripts/downloader_files_split_calculate.py --file_name_content data/faq--markdown.jsonl --file_name_splits
+      data/faq--markdown--splits.jsonl
+    deps:
+    - scripts/downloader_files_split_calculate.py
+    - data/faq--markdown.jsonl
+    outs:
+    - data/faq--markdown--splits.jsonl
+  faq_create_openai_files:
+    cmd: python scripts/downloader_openai_files.py --file_name_content data/faq--markdown.jsonl --file_name_splits
+      data/faq--markdown--splits.jsonl --file_name_openai_api_key data/openaiapikey.txt --file_name_file_ids
+      data/faq--openai-file-ids.jsonl
+    deps:
+    - scripts/downloader_openai_files.py
+    - data/faq--markdown.jsonl
+    - data/faq--markdown--splits.jsonl
+    outs:
+    - data/faq--openai-file-ids.jsonl
+  concat_openai_file_ids:
+    cmd: python scripts/concatenate_openai_files_list.py --file_names_input data/urls--downloaded--openai-file-ids.jsonl 
+      data/faq--openai-file-ids.jsonl --file_name_output data/openai-file-ids.jsonl
+    deps:
+    - scripts/concatenate_openai_files_list.py
+    - data/urls--downloaded--openai-file-ids.jsonl
+    - data/faq--openai-file-ids.jsonl
+    outs:
+    - data/openai-file-ids.jsonl

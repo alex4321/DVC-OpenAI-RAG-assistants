@@ -6,3 +6,7 @@
 /urls--downloaded.jsonl
 /urls--downloaded-markdown.jsonl
 /urls--downloaded-markdown--splits.jsonl
+/urls--downloaded--openai-file-ids.jsonl
+/faq.csv
+/faq--openai-file-ids.jsonl
+/openai-file-ids.jsonl

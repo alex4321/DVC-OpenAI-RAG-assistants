@@ -104,4 +104,4 @@ if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv):
                         type=int,
                         required=True,
                         help="Downloader thread pool size")
-    parser.parse_args(**vars(parser.parse_args()))
+    process(**vars(parser.parse_args()))

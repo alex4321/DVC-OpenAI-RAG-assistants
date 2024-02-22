@@ -1,0 +1,5 @@
+outs:
+- md5: d7681652726d90871c4b122e32781c5d
+  size: 27
+  hash: md5
+  path: faq.csv

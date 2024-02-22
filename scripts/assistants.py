@@ -167,4 +167,4 @@ if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv):
                         type=str,
                         required=True,
                         help="OpenAI api key file")
-    parser.parse_args(**vars(parser.parse_args()))
+    process(**vars(parser.parse_args()))

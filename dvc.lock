@@ -1,0 +1,174 @@
+schema: '2.0'
+stages:
+  update_assistants:
+    cmd: python scripts/assistants.py --file_name_characters=data/characters.yaml
+      --file_name_instruction=data/instruction.txt --file_name_assistants=data/assistants.csv
+      --file_name_openai_api_key=data/openaiapikey.txt
+    deps:
+    - path: data/characters.yaml
+      hash: md5
+      md5: d9ef45837a424bba7e1f9ef60f5f767c
+      size: 4636
+    - path: data/instruction.txt
+      hash: md5
+      md5: 0da57b9cead28c9ecb31a77d6eca4251
+      size: 1376
+    - path: scripts/assistants.py
+      hash: md5
+      md5: 1c648abc274779d85fd581aa64cab952
+      size: 6716
+    outs:
+    - path: data/assistants.csv
+      hash: md5
+      md5: 09b220eb867e86e95ef4dc1e584bfbde
+      size: 58
+  download_news:
+    cmd: python scripts/downloader.py --file_name_urls data/urls.txt --file_name_content
+      data/urls--downloaded.jsonl --thread_pool_size 8
+    deps:
+    - path: data/urls.txt
+      hash: md5
+      md5: 0aa2ff5b497d83c1c0907af7574a4ee6
+      size: 301
+    - path: scripts/downloader.py
+      hash: md5
+      md5: f04193e0b680836603027ba3d1befe4b
+      size: 3524
+    outs:
+    - path: data/urls--downloaded.jsonl
+      hash: md5
+      md5: f071bcd684febc3edbe7a5fbf115db81
+      size: 244732
+  download_markdownify:
+    cmd: python scripts/downloader_markdownify.py --file_name_html data/urls--downloaded.jsonl
+      --file_name_markdown data/urls--downloaded-markdown.jsonl
+    deps:
+    - path: data/urls--downloaded.jsonl
+      hash: md5
+      md5: f071bcd684febc3edbe7a5fbf115db81
+      size: 244732
+    - path: scripts/downloader_markdownify.py
+      hash: md5
+      md5: fa3a8a2284f68f944abda27a110a1ba3
+      size: 1436
+    outs:
+    - path: data/urls--downloaded-markdown.jsonl
+      hash: md5
+      md5: 012e0122713592dbb05e06021146a1ba
+      size: 135765
+  download_calculate_split:
+    cmd: python scripts/downloader_files_split_calculate.py --file_name_content data/urls--downloaded-markdown.jsonl
+      --file_name_splits data/urls--downloaded-markdown--splits.jsonl
+    deps:
+    - path: data/urls--downloaded-markdown.jsonl
+      hash: md5
+      md5: 012e0122713592dbb05e06021146a1ba
+      size: 135765
+    - path: scripts/downloader_files_split_calculate.py
+      hash: md5
+      md5: 819502edcd88acdb795f93fe0eca6b64
+      size: 2249
+    outs:
+    - path: data/urls--downloaded-markdown--splits.jsonl
+      hash: md5
+      md5: 4a4c282d2fb508b4f418b9512bd91088
+      size: 402
+  download_create_openai_files:
+    cmd: python scripts/downloader_openai_files.py --file_name_content data/urls--downloaded-markdown.jsonl
+      --file_name_splits data/urls--downloaded-markdown--splits.jsonl --file_name_openai_api_key
+      data/openaiapikey.txt --file_name_file_ids data/urls--downloaded--openai-file-ids.jsonl
+    deps:
+    - path: data/urls--downloaded-markdown--splits.jsonl
+      hash: md5
+      md5: 4a4c282d2fb508b4f418b9512bd91088
+      size: 402
+    - path: data/urls--downloaded-markdown.jsonl
+      hash: md5
+      md5: 012e0122713592dbb05e06021146a1ba
+      size: 135765
+    - path: scripts/downloader_openai_files.py
+      hash: md5
+      md5: c813c0ac0e642da4f2c5145b2ff3b113
+      size: 2763
+    outs:
+    - path: data/urls--downloaded--openai-file-ids.jsonl
+      hash: md5
+      md5: c19c0f019bb65a38a0a330d0b2745b15
+      size: 44
+  faq_markdown_prepare:
+    cmd: python scripts/faq_prepare_markdown.py --file_name_faq data/faq.csv --file_name_faq_markdown
+      data/faq--markdown.jsonl
+    deps:
+    - path: data/faq.csv
+      hash: md5
+      md5: d7681652726d90871c4b122e32781c5d
+      size: 27
+    - path: scripts/faq_prepare_markdown.py
+      hash: md5
+      md5: ef781268ee307fb3990504ac9e4a2d04
+      size: 1103
+    outs:
+    - path: data/faq--markdown.jsonl
+      hash: md5
+      md5: 746bcebad0747a610a6ade46512d4b1c
+      size: 59
+  faq_calculate_split:
+    cmd: python scripts/downloader_files_split_calculate.py --file_name_content data/faq--markdown.jsonl
+      --file_name_splits data/faq--markdown--splits.jsonl
+    deps:
+    - path: data/faq--markdown.jsonl
+      hash: md5
+      md5: 746bcebad0747a610a6ade46512d4b1c
+      size: 59
+    - path: scripts/downloader_files_split_calculate.py
+      hash: md5
+      md5: 819502edcd88acdb795f93fe0eca6b64
+      size: 2249
+    outs:
+    - path: data/faq--markdown--splits.jsonl
+      hash: md5
+      md5: 4df21ee472501333cea26a1a968bcefa
+      size: 24
+  faq_create_openai_files:
+    cmd: python scripts/downloader_openai_files.py --file_name_content data/faq--markdown.jsonl
+      --file_name_splits data/faq--markdown--splits.jsonl --file_name_openai_api_key
+      data/openaiapikey.txt --file_name_file_ids data/faq--openai-file-ids.jsonl
+    deps:
+    - path: data/faq--markdown--splits.jsonl
+      hash: md5
+      md5: 4df21ee472501333cea26a1a968bcefa
+      size: 24
+    - path: data/faq--markdown.jsonl
+      hash: md5
+      md5: 746bcebad0747a610a6ade46512d4b1c
+      size: 59
+    - path: scripts/downloader_openai_files.py
+      hash: md5
+      md5: c813c0ac0e642da4f2c5145b2ff3b113
+      size: 2763
+    outs:
+    - path: data/faq--openai-file-ids.jsonl
+      hash: md5
+      md5: 8f41d26385220154005127735ce17878
+      size: 44
+  concat_openai_file_ids:
+    cmd: python scripts/concatenate_openai_files_list.py --file_names_input data/urls--downloaded--openai-file-ids.jsonl
+      data/faq--openai-file-ids.jsonl --file_name_output data/openai-file-ids.jsonl
+    deps:
+    - path: data/faq--openai-file-ids.jsonl
+      hash: md5
+      md5: 8f41d26385220154005127735ce17878
+      size: 44
+    - path: data/urls--downloaded--openai-file-ids.jsonl
+      hash: md5
+      md5: c19c0f019bb65a38a0a330d0b2745b15
+      size: 44
+    - path: scripts/concatenate_openai_files_list.py
+      hash: md5
+      md5: bd1ed04082a653cba4fe14218b1607e3
+      size: 1326
+    outs:
+    - path: data/openai-file-ids.jsonl
+      hash: md5
+      md5: 901591f8c1a183f83be93cb53b0e74b1
+      size: 88
