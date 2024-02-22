@@ -45,7 +45,7 @@ def process(file_name_assistants: str, file_name_file_ids: str, file_name_openai
     df_assistants[["assistant_id", "file_ids"]].to_json(file_name_mapping, orient="records", lines=True)
 
 # %% ../nbs/07_update_assistant_files.ipynb 5
-if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv):
+if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv) and "nbdev" not in " ".join(sys.argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("--file_name_assistants",
                         type=str,

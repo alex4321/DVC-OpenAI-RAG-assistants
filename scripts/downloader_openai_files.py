@@ -48,7 +48,7 @@ def process(file_name_content: str, file_name_splits: str, file_name_openai_api_
     df_response.to_json(file_name_file_ids, orient="records", lines=True)
 
 # %% ../nbs/04_downloader_openai_files.ipynb 7
-if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv):
+if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv) and "nbdev" not in " ".join(sys.argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("--file_name_content",
                         type=str,

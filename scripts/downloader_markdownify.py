@@ -24,7 +24,7 @@ def process(file_name_html: str, file_name_markdown: str) -> None:
     df.to_json(file_name_markdown, orient="records", lines=True)
 
 # %% ../nbs/02_downloader_markdownify.ipynb 4
-if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv):
+if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv) and "nbdev" not in " ".join(sys.argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("--file_name_html",
                         type=str,

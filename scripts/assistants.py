@@ -149,7 +149,7 @@ def process(file_name_characters: str, file_name_instruction: str, file_name_ass
     df_assistants[["assistant_id", "character_id"]].to_csv(file_name_assistants, index=False)
 
 # %% ../nbs/00_assistants.ipynb 10
-if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv):
+if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv) and "nbdev" not in " ".join(sys.argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("--file_name_characters",
                         type=str,

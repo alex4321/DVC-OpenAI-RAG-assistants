@@ -1,0 +1,12 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_assistants.ipynb
+      - 01_downloader.ipynb
+      - 02_downloader_markdownify.ipynb
+      - 03_downloader_openai_files_split_calculate.ipynb
+      - 04_downloader_openai_files.ipynb
+      - 05_faq_prepare_markdown.ipynb
+      - 06_concatenate_openai_files_lists.ipynb
+      - 07_update_assistant_files.ipynb

@@ -90,7 +90,7 @@ def process(file_name_urls: str, file_name_content: str, thread_pool_size: int) 
     df_content.to_json(file_name_content, orient="records", lines=True)
 
 # %% ../nbs/01_downloader.ipynb 5
-if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv):
+if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv) and "nbdev" not in " ".join(sys.argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("--file_name_urls",
                         type=str,

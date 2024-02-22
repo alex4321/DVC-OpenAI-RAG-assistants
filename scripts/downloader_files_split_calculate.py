@@ -41,7 +41,7 @@ def process(file_name_content: str, file_name_splits: str) -> None:
     df[["url", "split"]].to_json(file_name_splits, orient="records", lines=True)
 
 # %% ../nbs/03_downloader_openai_files_split_calculate.ipynb 5
-if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv):
+if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv) and "nbdev" not in " ".join(sys.argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("--file_name_content",
                         type=str,

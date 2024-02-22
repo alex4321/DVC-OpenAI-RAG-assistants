@@ -23,7 +23,7 @@ def process(file_names_input: List[str], file_name_output: str):
     df.to_json(file_name_output, orient="records", lines=True)
 
 # %% ../nbs/06_concatenate_openai_files_lists.ipynb 5
-if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv):
+if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv) and "nbdev" not in " ".join(sys.argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("--file_names_input",
                         nargs="+",

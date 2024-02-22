@@ -16,7 +16,7 @@ def process(file_name_faq: str, file_name_faq_markdown: str):
     df[["content", "url"]].to_json(file_name_faq_markdown, orient="records", lines=True)
 
 # %% ../nbs/05_faq_prepare_markdown.ipynb 4
-if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv):
+if __name__ == "__main__" and "ipykernel_launcher" not in " ".join(sys.argv) and "nbdev" not in " ".join(sys.argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("--file_name_faq",
                         type=str,
