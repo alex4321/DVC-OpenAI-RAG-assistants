@@ -14,3 +14,17 @@ stages:
     - data/urls.txt
     outs:
     - data/urls--downloaded.jsonl
+  download_markdownify:
+    cmd: pyhon scripts/markdownify.py --file_name_html data/urls--downloaded.jsonl
+      --file_name_markdown data/urls--downloaded-markdown.jsonl
+    deps:
+    - data/urls--downloaded.jsonl
+    outs:
+    - data/urls--downloaded-markdown.jsonl
+  download_calculate_split:
+    cmd: python --file_name_content data/urls--downloaded-markdown.jsonl --file_name_splits
+      data/urls--downloaded-markdown--splits.jsonl
+    deps:
+    - data/urls--downloaded-markdown.jsonl
+    outs:
+    - data/urls--downloaded-markdown--splits.jsonl

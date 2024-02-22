@@ -12,6 +12,7 @@ import pandas as pd
 # %% ../nbs/02_markdownify.ipynb 2
 def process(file_name_html: str, file_name_markdown: str) -> None:
     df = pd.read_json(file_name_html, orient="records", lines=True)
+    df["content"] = "# " + df["title"] + "\n\n" + df["content"]
     df["content"] = "\n" + df["content"].apply(
         lambda text: md(text, heading_style="ATX")
     )

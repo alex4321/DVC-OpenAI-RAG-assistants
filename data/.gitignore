@@ -4,3 +4,5 @@
 /assistants.csv
 /urls.txt
 /urls--downloaded.jsonl
+/urls--downloaded-markdown.jsonl
+/urls--downloaded-markdown--splits.jsonl

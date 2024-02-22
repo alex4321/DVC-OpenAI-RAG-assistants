@@ -27,6 +27,7 @@ d = { 'settings': {'branch': '', 'doc_baseurl': '/', 'doc_host': 'https://.githu
                                           'robot.scripts.downloader._remove_scripts_and_styles': ( 'downloader.html#_remove_scripts_and_styles',
                                                                                                    'robot/scripts/downloader.py'),
                                           'robot.scripts.downloader.process': ('downloader.html#process', 'robot/scripts/downloader.py')},
+            'robot.scripts.files_split_calculate': {},
             'robot.scripts.markdownify': { 'robot.scripts.markdownify.process': ( 'markdownify.html#process',
                                                                                   'robot/scripts/markdownify.py')},
             'robot.setup': {}}}
