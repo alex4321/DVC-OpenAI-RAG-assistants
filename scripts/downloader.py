@@ -18,6 +18,7 @@ import requests
 # %% ../nbs/01_downloader.ipynb 2
 class PageData(BaseModel):
     url: str
+    title: str
     content: str
     publish_date: str
 
@@ -44,6 +45,7 @@ def _parse_page(url: str, goose: Goose) -> Union[PageData, None]:
         extraction = goose.extract(raw_html=html)
         return PageData(
             url=url,
+            title=extraction.title,
             content=extraction.top_node_raw_html,
             publish_date=str(extraction.publish_date),
         )
@@ -70,7 +72,7 @@ def process(file_name_urls: str, file_name_content: str, thread_pool_size: int) 
     if os.path.exists(file_name_content):
         df_content = pd.read_json(file_name_content, orient="records", lines=True)
     else:
-        df_content = pd.DataFrame({"url": [], "content": [], "publish_date": []})
+        df_content = pd.DataFrame({"url": [], "title": [], "content": [], "publish_date": []})
     print("Removing unnecessary content")
     df_content = df_content.loc[df_content["url"].isin(urls)]
     print("Downloading new content")

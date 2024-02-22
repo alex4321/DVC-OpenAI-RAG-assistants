@@ -7,3 +7,10 @@ stages:
     - data/instruction.txt
     outs:
     - data/assistants.csv
+  download_news:
+    cmd: pyhon scripts/downloader.py --file_name_urls data/urls.txt --file_name_content
+      data/urls--downloaded.jsonl --thread_pool_size 8
+    deps:
+    - data/urls.txt
+    outs:
+    - data/urls--downloaded.jsonl
